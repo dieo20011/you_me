@@ -1,0 +1,26 @@
+<div class="max-w-7xl mx-auto p-6">
+  <div *ngFor="let gallery of data()">
+    <div
+      class="bg-pink-200 p-4 rounded-lg mb-4 shadow-md mt-4 lg:text-left text-center"
+    >
+      <h2 class="text-lg font-semibold text-gray-900 mb-0 underline">
+        {{ gallery.date }}
+      </h2>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div
+        *ngFor="let product of gallery.products"
+        class="overflow-hidden rounded-lg shadow-lg"
+      >
+        <img
+          class="w-full h-full object-cover"
+          [src]="product.imgSrc"
+          (click)="openImage(product.imgSrc)"
+          [alt]="product.alt"
+        />
+      </div>
+    </div>
+  </div>
+  <app-image-view [imgSrc]="selectedImage" [isVisible]="selectedImage !== null"></app-image-view>
+
+</div>

@@ -1,0 +1,9 @@
+<div
+  *ngIf="isVisible"
+  class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+>
+  <div class="bg-white rounded-lg p-4 relative">
+    <button (click)="close()" class="absolute top-2 right-2">X</button>
+    <img [src]="imgSrc" class="max-w-50 max-h-50" />
+  </div>
+</div>
