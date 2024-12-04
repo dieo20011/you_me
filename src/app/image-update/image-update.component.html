@@ -1,0 +1,72 @@
+<div class="image-create-form">
+    <h1 class="text-2xl">Edit Image Memories</h1>
+  
+    <!-- Form Container -->
+    <form [formGroup]="imageForm" (ngSubmit)="onSubmit()" class="mt-4">
+      <!-- Date Picker for Group Image -->
+      <nz-form-item>
+        <nz-form-label nzRequired [nzFor]="'date'" nzSpan="4">Group Date</nz-form-label>
+        <nz-form-control [nzErrorTip]="dateValueTpl">
+          <nz-date-picker
+            formControlName="date"
+            [nzPlaceHolder]="'Select Date'"
+          ></nz-date-picker>
+          <ng-template #dateValueTpl let-control>
+              <ng-container #dateValueTpl *ngIf="!imageForm.get('date')?.value">
+                <p>{{ 'This field is require' }}</p>
+              </ng-container>
+            </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+  
+      <!-- Input for Description -->
+      <nz-form-item>
+        <nz-form-label nzRequired [nzFor]="'desc'"  nzSpan="4">Description</nz-form-label>
+        <nz-form-control [nzErrorTip]="descValueTpl">
+          <input
+            nz-input
+            formControlName="desc"
+            placeholder="Enter a description"
+          />
+          <ng-template #descValueTpl let-control>
+              <ng-container #descValueTpl *ngIf="!imageForm.get('desc')?.value">
+                  <p>{{ 'This field is require' }}</p>
+              </ng-container>
+            </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+  
+      <!-- List of Images -->
+
+      <nz-form-item>
+        <nz-form-label nzFor="'existingImages'" nzSpan="4">Existing Images</nz-form-label>
+        <nz-form-control>
+          <div class="image-list">
+            <div *ngFor="let image of imageForm.get('images')?.value; let i = index" class="flex items-center mt-2">
+              <img [src]="image.imageLink" alt="Image" width="100" />
+              <button type="button" nz-button nzDanger (click)="removeImage(i)" class="ml-2"><span nz-icon nzType="delete" nzTheme="outline"></span></button>
+            </div>
+          </div>
+        </nz-form-control>
+      </nz-form-item>
+  
+      <!-- Add New Image -->
+      <nz-form-item>
+        <nz-form-label nzFor="'newImage'" nzSpan="4">New Image</nz-form-label>
+        <nz-form-control>
+          <input
+            type="file"
+            (change)="onFileSelected($event)"
+            accept="image/*"
+            multiple
+          />
+        </nz-form-control>
+      </nz-form-item>
+  
+    <div *nzModalFooter>
+      <button nz-button nzType="default" (click)="onDestroyModal()">Cancel</button>
+      <button nz-button nzType="primary"  (click)="onSubmit()">Submit</button>
+    </div>
+    </form>
+  </div>
+  

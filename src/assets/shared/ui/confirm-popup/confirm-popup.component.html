@@ -1,0 +1,9 @@
+<h3>{{ data.title }}</h3>
+<ul>
+  <li *ngFor="let list of data.lists">{{ list }}</li>
+</ul>
+<div class="flex justify-end mt-4">
+  <button nz-button (click)="onDestroyModal()" class="mr-2">Cancel</button>
+  <button nz-button nzType="primary" (click)="onSubmit()">Confirm</button>
+</div>
+
